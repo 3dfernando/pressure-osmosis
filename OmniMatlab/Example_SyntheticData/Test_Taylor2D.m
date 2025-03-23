@@ -29,7 +29,7 @@ clear; clc; close all;
 
 %Generates a Taylor vortex according to Charonko 2010 DOI 10.1088/0957-0233/21/10/105401
 
-t=.6; %Time, s
+t=.2; %Time, s
 dt=0.001; %dt for time derivative
 H=1e-6; %Vortex strength, m^2
 nu=1e-6; %Kinematic Viscosity, m^2/s

@@ -12,9 +12,35 @@ The I-MODI solver uses the matrix inversion to perform the same set of integrals
 
 The OS-MODI solver performs a single matrix inversion that provides the pressure solution in one iteration only. This is done by finding the fixed point of the matrix equation in the I-MODI method (i.e., taking the number of iterations to infinity). The mathematics are further outlined in our follow-up paper [3].
 
+## Installation - Matlab code - GPU-accelerated
+The Matlab implementation is a mex file. A compiled .mexw64 file is provided under Releases, but it may not work in your machine (it was compiled in a x64 machine, Windows 10, Matlab R2023b). If it doesn't work, it will throw an error of the type: *MEX error: The specified module could not be found.*
+
+It is best if you compile it for your own combination of Matlab version and OS. Compiling the program is straightforward:
+1. Make sure your Matlab has the *parallel computing toolbox* installed. This app will not work without it. To check, in the command line you can type *ver* and look in the list if the *parallel computing toolbox* is present.
+2. Download the file *Matlab/OSMODI.cu* from this repository. Place it in a folder of your choice. Best if you place it in a folder in Matlab's search path (say, C:/Users/your_user/Documents/Matlab/)
+3. In Matlab, make sure the current path is the folder where OSMODI.cu is located. 
+4. Run in the command line *mexcuda OSMODI.cu*
+5. This should create a file OSMODI.mexw64 or OSMODI.mexa64 in the same folder, if it is successful.
+6. If it throws an error:
+  - Try installing the CPU-only version of this code (see next section)
+  - Please let us know (you can contact the corresponding author at *fzigunov@syr.edu*) and we will try to provide assistance. Make sure you let us know your Matlab version, Operating System, and the error message you got.
+
+
+## Installation - Matlab code - CPU-only
+If the above installation procedure doesn't work, it may be because your system does not have a supported NVidia GPU. In this case, you may want to try our code using the CPU-only version. The CPU version is slower, even when using parallel processing. However, for 2D fields the performance difference is not quite as large and it may be sufficient for your application.
+
+To compile the CPU-only code:
+1. Your Matlab still needs the *parallel computing toolbox* installed, as the CPU version is multi-threaded.
+2. Download the file *Matlab/OSMODI_CPU.cpp* from this repository. Place it in a folder of your choice. Best if you place it in a folder in Matlab's search path (say, C:/Users/your_user/Documents/Matlab/)
+3. In Matlab, make sure the current path is the folder where OSMODI_CPU.cpp is located. 
+4. Run in the command line *mex OSMODI_CPU.cpp*
+5. This should create a file OSMODI_CPU.mexw64 or OSMODI_CPU.mexa64 in the same folder, if it is successful.
+6. If it still throws an error, please contact the corresponding author at *fzigunov@syr.edu* and we will try to provide assistance. Make sure you let us know your Matlab version, Operating System, and the error message you got.
+
+
 
 ## Usage - Matlab Code
-The Matlab implementation is a .mex file. It was compiled using Matlab R2023a, and it was tested in Matlab R2021b as well (Windows only). 
+The Matlab implementation is a mex file. After you compile it (see above), you can use the following code to run it in Matlab:
 
 *options struct and function prototype*
 > opts.SolverToleranceRel=1e-4;  
