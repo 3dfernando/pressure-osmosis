@@ -1,0 +1,95 @@
+cmake_minimum_required(VERSION 3.18)
+project(osmodi_gpu_bind LANGUAGES CXX CUDA)
+
+# Set standards
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CUDA_STANDARD 14)
+
+# Find required packages
+find_package(CUDAToolkit REQUIRED)
+find_package(OpenMP REQUIRED COMPONENTS CXX)
+find_package(Python COMPONENTS Interpreter Development REQUIRED)
+find_package(pybind11 CONFIG REQUIRED)
+
+# Auto-detect CUDA version and set appropriate GPU architectures
+# CUDA 13.0+ dropped support for architectures older than sm_80
+if(CUDAToolkit_VERSION VERSION_GREATER_EQUAL "13.0")
+    set(GPU_ARCHITECTURES "80;86;89;90")
+    set(GPU_ARCH_NAMES "Ampere, Ada, Blackwell")
+    message(STATUS "CUDA ${CUDAToolkit_VERSION} detected")
+    message(STATUS "Supporting GPU architectures: ${GPU_ARCH_NAMES}")
+    message(STATUS "  sm_80: A100")
+    message(STATUS "  sm_86: RTX 30-series")
+    message(STATUS "  sm_89: RTX 40-series")
+    message(STATUS "  sm_90: RTX 50-series")
+elseif(CUDAToolkit_VERSION VERSION_GREATER_EQUAL "12.0")
+    set(GPU_ARCHITECTURES "60;61;70;75;80;86;89;90")
+    set(GPU_ARCH_NAMES "Pascal through Blackwell")
+    message(STATUS "CUDA ${CUDAToolkit_VERSION} detected")
+    message(STATUS "Supporting GPU architectures: ${GPU_ARCH_NAMES}")
+    message(STATUS "  sm_60/61: GTX 10-series")
+    message(STATUS "  sm_70: V100")
+    message(STATUS "  sm_75: RTX 20-series")
+    message(STATUS "  sm_80: A100")
+    message(STATUS "  sm_86: RTX 30-series")
+    message(STATUS "  sm_89: RTX 40-series")
+    message(STATUS "  sm_90: RTX 50-series")
+else()
+    # CUDA 11.x and older
+    set(GPU_ARCHITECTURES "60;61;70;75;80;86;89")
+    set(GPU_ARCH_NAMES "Pascal through Ada")
+    message(STATUS "CUDA ${CUDAToolkit_VERSION} detected")
+    message(STATUS "Supporting GPU architectures: ${GPU_ARCH_NAMES}")
+    message(STATUS "  sm_60/61: GTX 10-series")
+    message(STATUS "  sm_70: V100")
+    message(STATUS "  sm_75: RTX 20-series")
+    message(STATUS "  sm_80: A100")
+    message(STATUS "  sm_86: RTX 30-series")
+    message(STATUS "  sm_89: RTX 40-series")
+endif()
+
+# Create the Python module
+pybind11_add_module(osmodi_gpu_bind osmodi_gpu.cu)
+
+# Link required libraries
+target_link_libraries(osmodi_gpu_bind PRIVATE 
+    CUDA::cudart
+    CUDA::curand
+    OpenMP::OpenMP_CXX
+)
+
+# Set GPU properties with detected architectures
+set_target_properties(osmodi_gpu_bind PROPERTIES
+    CUDA_SEPARABLE_COMPILATION ON
+    CUDA_ARCHITECTURES "${GPU_ARCHITECTURES}"
+    POSITION_INDEPENDENT_CODE ON
+    OUTPUT_NAME "osmodi_gpu_bind"
+    PREFIX ""
+)
+
+# CUDA Compilation Flags
+target_compile_options(osmodi_gpu_bind PRIVATE
+    $<$<COMPILE_LANGUAGE:CUDA>:
+        --fmad=true
+        --prec-div=true
+        --prec-sqrt=true
+        --ftz=false
+        -Xcompiler=/openmp
+    >
+)
+
+# C++ Compilation Flags (MSVC)
+if(MSVC)
+    target_compile_options(osmodi_gpu_bind PRIVATE
+        $<$<COMPILE_LANGUAGE:CXX>:
+            /openmp
+            /fp:precise
+        >
+    )
+endif()
+
+# Preprocessor definitions
+target_compile_definitions(osmodi_gpu_bind PRIVATE NOMINMAX)
+
+message(STATUS "Building OSMODI GPU solver")
+message(STATUS "Compiling for architectures: ${GPU_ARCHITECTURES}")
