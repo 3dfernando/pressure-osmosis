@@ -1,0 +1,5 @@
+The bulk of this project is copyright Triad National Security, LLC. and distributed under GPLv3 or later.  
+
+vtkread.m is derived from vtkread.m, Copyright (c) 2016 Joe Yeh and distributed under the MIT License. Modifications are copyright Triad National Security, LLC. and distributed under GPLv3 or later.
+
+See each file for further information on the appropriate license, and COPYING for the full text of the GPLv3.  

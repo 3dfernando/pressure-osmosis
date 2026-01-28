@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+*.egg
+*.egg-info/
+.Python
+pip-log.txt
+
+# Build artifacts
+build/
+dist/
+*.whl
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.dir/
+*.vcxproj*
+*.sln
+.vs/
+compile_commands.json
+
+# Development/testing folders (not part of package)
+pybind_proj_1/
+experiments/
+python/
+
+# Large data files
+*.mat
+*.h5
+*.hdf5
+*.npy
+*.npz
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# Logs
+*.log
+
+# Jupyter
+.ipynb_checkpoints/
+
+# C++/CUDA compiled
+*.o
+*.obj
+*.dll
+*.exe
+*.out

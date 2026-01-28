@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 3.12)
+project(osmodi_cpu_bind LANGUAGES CXX)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Find Python and pybind11
+find_package(Python COMPONENTS Interpreter Development REQUIRED)
+find_package(pybind11 CONFIG REQUIRED)
+
+# Find OpenMP for CPU parallelization
+find_package(OpenMP REQUIRED COMPONENTS CXX)
+
+# Create the Python module - using osmodi_cpu.cpp
+pybind11_add_module(osmodi_cpu_bind osmodi_cpu.cpp)
+
+# Link OpenMP
+target_link_libraries(osmodi_cpu_bind PRIVATE OpenMP::OpenMP_CXX)
+
+# Compiler flags for proper floating point handling
+if(MSVC)
+    target_compile_options(osmodi_cpu_bind PRIVATE
+        /openmp
+        /fp:precise
+    )
+endif()
+
+# Set output name
+set_target_properties(osmodi_cpu_bind PROPERTIES
+    OUTPUT_NAME "osmodi_cpu_bind"
+    PREFIX ""
+)
+
+message(STATUS "Building OSMODI CPU solver")
