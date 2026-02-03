@@ -36,12 +36,12 @@ jobs:
     
     - name: Install package
       run: |
-        cd Python
+        cd OmniPython
         pip install .
     
     - name: Run tests
       run: |
-        pytest Python/tests/ -v
+        pytest OmniPython/tests/ -v
     
     - name: Verify import
       run: |
