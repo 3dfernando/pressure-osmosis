@@ -35,7 +35,7 @@ pip install osmodi-solver
 **Steps:**
 ```bash
 git clone [repository-url]
-cd osmodi_solver
+cd OmniPython
 pip install .
 ```
 
