@@ -4,11 +4,11 @@ on:
   push:
     branches: [ main, master ]
     paths:
-      - 'Python/**'
+      - 'OmniPython/**'
   pull_request:
     branches: [ main, master ]
     paths:
-      - 'Python/**'
+      - 'OmniPython/**'
 
 jobs:
   test:
