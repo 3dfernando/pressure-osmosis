@@ -45,11 +45,13 @@ jobs:
       run: |
         cd OmniPython
         pip install .
-    
-    - name: Run tests
+
+    - name: Remove source folder
+      run: Remove-Item -Recurse -Force OmniPython/osmodi
+
+    - name: Run tests  
       run: pytest OmniPython/tests/ -v
-      working-directory: ./
-    
+        
     - name: Verify import
       run: |
         python -c "import osmodi; print(f'GPU: {osmodi.GPU_AVAILABLE}, CPU: {osmodi.CPU_AVAILABLE}')"
