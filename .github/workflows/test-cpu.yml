@@ -9,6 +9,7 @@ on:
     branches: [ main, master ]
     paths:
       - 'OmniPython/**'
+  workflow_dispatch:
 
 jobs:
   test:
