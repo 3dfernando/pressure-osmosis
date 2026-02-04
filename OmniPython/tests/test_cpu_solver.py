@@ -4,7 +4,6 @@ import pytest
 
 np.random.seed(0)  
 
-@pytest.mark.skipif(True, reason="CPU solver must always be available")
 def test_cpu_solver_small_3d():
     """Test CPU solver on small 3D problem."""
     import osmodi
@@ -22,7 +21,6 @@ def test_cpu_solver_small_3d():
     assert isinstance(progress, np.ndarray)
 
 
-@pytest.mark.skipif(True, reason="CPU solver must always be available")
 def test_cpu_solver_2d():
     """Test CPU solver on small 2D problem."""
     import osmodi
