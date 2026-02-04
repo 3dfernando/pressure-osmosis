@@ -47,8 +47,8 @@ jobs:
         pip install .
     
     - name: Run tests
-      run: |
-        pytest OmniPython/tests/ -v
+      run: pytest OmniPython/tests/ -v
+      working-directory: ./
     
     - name: Verify import
       run: |
