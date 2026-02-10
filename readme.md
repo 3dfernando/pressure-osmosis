@@ -8,9 +8,9 @@ Time-resolved PIV on a boundary layer:
 
 https://github.com/user-attachments/assets/24adb4de-0e4a-4186-b703-7349924b1337
 
-
 3D reconstruction of pressure, velocity, temperature and density from PIV on a double-fin SBLI flow at M=2:
 
+https://github.com/user-attachments/assets/de02f37e-0ff3-4979-9f63-c41413818fb4
 
 ## Summary
 
@@ -194,4 +194,5 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 
