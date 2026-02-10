@@ -2,6 +2,22 @@
 
 *If you use this code in your PIV project, please cite refs. [2] and [3] in your paper.* 
 
+## Sample Results
+
+Time-resolved PIV on a boundary layer:
+
+<video width="700" controls>
+  <source src="ImageSamples/Boundary_Layer.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+3D reconstruction of pressure, velocity, temperature and density from PIV on a double-fin SBLI flow at M=2:
+
+<video width="500" controls>
+  <source src="ImageSamples/SBLI_4field.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Summary
 
 Two versions of the MODI method are implemented in this code. The I-MODI is an iterative solver, whereas the OS-MODI is a one-shot solver. The two solvers implement the same "idea", i.e., taking the omnidirectional integration to the limit of infinite parallel rays from the perspective of a single cell to devise coefficients for a matrix equation. 

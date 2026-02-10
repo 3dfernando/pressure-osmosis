@@ -40,7 +40,7 @@ U0=nu/sqrt(H); %Characteristic Velocity, m/s
 T0=L0/U0; %Characteristic Time, s
 P0=rho*U0^2; %Characteristic Pressure, Pa
 
-NptsX=2101; NptsY=NptsX; r=NptsY/NptsX;
+NptsX=357; NptsY=400; r=NptsY/NptsX;
 
 DomainSize=2;
 x=linspace(-DomainSize*L0,DomainSize*L0,NptsX); y=linspace(-DomainSize*L0,DomainSize*L0,NptsY); dx=x(2)-x(1); dy=y(2)-y(1);
